@@ -95,14 +95,14 @@ export function About() {
             />
           </div>
           <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div className="relative aspect-[3/4] w-full max-w-[320px] max-h-[420px] mx-auto md:mx-0 rounded-xl overflow-hidden shadow-lg bg-gray-100">
+            <div className="relative aspect-[3/4] w-full max-w-[320px] max-h-[420px] mx-auto md:mx-0 rounded-md overflow-hidden">
               <Image
-                src="/ceo-iwewezinem-stephen.jpg"
+                src="/ceo-iwewezinem-stephen.jpeg"
                 alt="Iwewezinem Stephen, CEO"
                 fill
                 className="object-cover object-top"
                 sizes="(max-width: 768px) 90vw, 320px"
-                quality={95}
+                quality={75}
                 priority
               />
             </div>
