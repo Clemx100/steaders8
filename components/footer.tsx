@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Leaf, Mail, Phone, MapPin, Instagram, Youtube } from 'lucide-react'
+import { Leaf, Phone, MapPin, Instagram, Youtube } from 'lucide-react'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -50,9 +50,14 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/#products" className="hover:text-green-500 transition-colors">
-                  Products
-                </a>
+                <Link href="/crop-farming" className="hover:text-green-500 transition-colors">
+                  Crop Farming
+                </Link>
+              </li>
+              <li>
+                <Link href="/livestock-farming" className="hover:text-green-500 transition-colors">
+                  Livestock Farming
+                </Link>
               </li>
               <li>
                 <a href="/#updates" className="hover:text-green-500 transition-colors">
@@ -112,7 +117,6 @@ export function Footer() {
                 </a>
               </div>
               <div className="flex gap-3 items-center">
-                <Mail className="w-5 h-5 text-green-600 flex-shrink-0" />
                 <a href="mailto:info@steaders8.com" className="hover:text-green-500 transition-colors">
                   info@steaders8.com
                 </a>

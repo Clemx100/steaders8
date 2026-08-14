@@ -7,11 +7,13 @@ import { Products } from '@/components/products'
 import { Updates } from '@/components/updates'
 import { Investment } from '@/components/investment'
 import { Footer } from '@/components/footer'
+import { InvestmentAlertPopup } from '@/components/investment-alert'
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
+      <InvestmentAlertPopup />
       <Hero />
       <Products />
       <About />

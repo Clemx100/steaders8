@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -10,7 +10,6 @@ import {
   ArrowLeft,
   CheckCircle,
   FileText,
-  Mail,
   Phone,
   Sprout,
   Coins,
@@ -27,30 +26,26 @@ import {
 } from 'lucide-react'
 
 type Tab = 'upcoming' | 'ongoing'
-type Opportunity = 'greenhouse' | 'truck' | 'supermarket' | 'biogas'
+type Opportunity = 'truck' | 'supermarket' | 'biogas'
 const WHATSAPP_URL = 'https://wa.me/2348131074911'
-const EMAIL_ADDRESS = 'steaders8@gmail.com'
 const PHONE_NUMBER = '08131074911'
 
 export default function UpcomingInvestmentContent() {
   const searchParams = useSearchParams()
   const [tab, setTab] = useState<Tab>('upcoming')
-  const [opportunity, setOpportunity] = useState<Opportunity>('greenhouse')
+  const [opportunity, setOpportunity] = useState<Opportunity>('biogas')
 
-  // When opened with ?tab=ongoing (e.g. from Yam Farming card), show Ongoing tab
   useEffect(() => {
-    if (searchParams.get('tab') === 'ongoing') {
-      setTab('ongoing')
+    const tabParam = searchParams.get('tab')
+    if (tabParam === 'ongoing' || tabParam === 'upcoming') {
+      setTab(tabParam)
     }
   }, [searchParams])
 
   useEffect(() => {
-    if (tab !== 'ongoing') return
-    const hash = window.location.hash
+    const hash = window.location.hash.replace('#', '')
     if (!hash) return
-    const targetId = hash.replace('#', '')
-    if (!targetId) return
-    const target = document.getElementById(targetId)
+    const target = document.getElementById(hash)
     if (!target) return
     requestAnimationFrame(() => {
       target.scrollIntoView({ behavior: 'auto', block: 'start' })
@@ -104,6 +99,305 @@ export default function UpcomingInvestmentContent() {
           {tab === 'ongoing' && (
             <div className="space-y-8">
               <h2 className="font-serif text-2xl font-bold text-gray-900">Ongoing Investment</h2>
+
+              {/* Greenhouse Expansion */}
+              <div
+                id="greenhouse-expansion"
+                className="scroll-mt-24 rounded-xl border-2 border-green-300 bg-gradient-to-br from-green-50/80 to-white p-6 md:p-8 shadow-sm"
+              >
+                <div className="grid md:grid-cols-2 gap-8 items-start mb-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
+                      <Image
+                        src="/upcoming/greenhouse-5.png"
+                        alt="Steaders8 greenhouse structure"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 200px"
+                        unoptimized
+                      />
+                    </div>
+                    <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
+                      <Image
+                        src="/upcoming/greenhouse-6.png"
+                        alt="Greenhouse crops and growing area"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 200px"
+                        unoptimized
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="font-serif text-2xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                      <Sprout className="w-7 h-7 text-green-600 shrink-0" />
+                      Greenhouse Expansion
+                    </h3>
+                    <p className="text-green-700 font-semibold mb-4">
+                      Bell Pepper &amp; Super Habanero Production
+                    </p>
+                    <p className="text-gray-600 mb-4">
+                      Steaders8 Farm is expanding into controlled-environment agriculture with four commercial
+                      greenhouses for Bell Pepper and Super Habanero. Phase One targets approximately 2,000 plants
+                      per production cycle at our farm in Lokoji, Ofada, Ogun State.
+                    </p>
+                    <p className="text-gray-600 mb-4">
+                      This is a strategic extension of our existing commercial farming operation — not a new
+                      start-up. Investors participate through a five-year, project-based profit-sharing arrangement
+                      while Steaders8 Farm retains ownership and operational control.
+                    </p>
+                    <div className="inline-flex flex-col gap-1 rounded-lg bg-green-50 border border-green-200 px-4 py-3 mb-6">
+                      <span className="text-sm font-medium text-green-800">Investment window</span>
+                      <span className="text-lg font-bold text-green-900">Open now</span>
+                      <span className="text-sm text-green-700">Limited to 8 investors</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                  <div className="rounded-lg border border-green-200 bg-white p-4">
+                    <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Funding target</p>
+                    <p className="text-xl font-bold text-gray-900 mt-1">₦24,000,000</p>
+                  </div>
+                  <div className="rounded-lg border border-green-200 bg-white p-4">
+                    <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Per investor</p>
+                    <p className="text-xl font-bold text-gray-900 mt-1">₦3,000,000</p>
+                  </div>
+                  <div className="rounded-lg border border-green-200 bg-white p-4">
+                    <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Term</p>
+                    <p className="text-xl font-bold text-gray-900 mt-1">5 years</p>
+                  </div>
+                  <div className="rounded-lg border border-green-200 bg-white p-4">
+                    <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Model</p>
+                    <p className="text-xl font-bold text-gray-900 mt-1">Profit sharing</p>
+                  </div>
+                </div>
+
+                <div className="mb-8">
+                  <h4 className="text-sm font-semibold text-gray-900 mb-3">Investment Highlights</h4>
+                  <ul className="grid md:grid-cols-2 gap-2 text-sm text-gray-600">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                      <span>Expands an established commercial farm, not an untested concept</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                      <span>Four greenhouses: two Bell Pepper, two Super Habanero (~500 plants each)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                      <span>Drip irrigation and fertigation for efficient water and nutrient use</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                      <span>High-value crops with strong demand from supermarkets, hotels, and wholesalers</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                      <span>Quarterly reports, production updates, and optional farm visits</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                      <span>No equity dilution — project-specific investment in greenhouse infrastructure</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6 mb-8">
+                  <div className="rounded-xl border border-gray-200 bg-white p-6">
+                    <h4 className="text-sm font-semibold text-gray-900 mb-3">Phase One Scope</h4>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li><span className="font-medium text-gray-900">Greenhouses:</span> 4 units (10 m Ã— 30 m each, ~1,200 mÂ² total)</li>
+                      <li><span className="font-medium text-gray-900">Total plants:</span> ~2,000 per cycle</li>
+                      <li><span className="font-medium text-gray-900">Expected yield:</span> ~3 kg per plant (~6,000 kg total)</li>
+                      <li><span className="font-medium text-gray-900">Cycle:</span> ~6 months (plus setup and sales time)</li>
+                      <li><span className="font-medium text-gray-900">Location:</span> Lokoji, Ofada, Ogun State</li>
+                    </ul>
+                  </div>
+                  <div className="rounded-xl border border-gray-200 bg-white p-6">
+                    <h4 className="text-sm font-semibold text-gray-900 mb-3">Use of Funds</h4>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li><span className="font-medium text-gray-900">Greenhouse construction:</span> ₦18,313,104 (76.3%)</li>
+                      <li><span className="font-medium text-gray-900">Bell Pepper inputs:</span> ₦1,236,000 (5.2%)</li>
+                      <li><span className="font-medium text-gray-900">Super Habanero inputs:</span> ₦1,190,000 (5.0%)</li>
+                      <li><span className="font-medium text-gray-900">Labour &amp; operations:</span> ₦1,000,000 (4.2%)</li>
+                      <li><span className="font-medium text-gray-900">Working capital &amp; contingency:</span> ₦2,260,896 (9.4%)</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="rounded-xl border border-gray-200 bg-white p-6 mb-8">
+                  <h4 className="text-sm font-semibold text-gray-900 mb-3">Projected Revenue per Cycle</h4>
+                  <p className="text-xs text-gray-500 mb-4">
+                    Planning estimates only — not guarantees. Based on proposal assumptions of 3 kg yield per plant.
+                  </p>
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full text-sm text-left text-gray-600">
+                      <thead className="text-xs uppercase text-gray-500 border-b">
+                        <tr>
+                          <th className="py-2 pr-4 font-semibold">Crop</th>
+                          <th className="py-2 pr-4 font-semibold">Plants</th>
+                          <th className="py-2 pr-4 font-semibold">Planning price</th>
+                          <th className="py-2 font-semibold">Projected gross revenue</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className="border-b">
+                          <td className="py-3 pr-4">Bell Pepper</td>
+                          <td className="py-3 pr-4">1,000</td>
+                          <td className="py-3 pr-4">₦5,000/kg</td>
+                          <td className="py-3">₦15,000,000</td>
+                        </tr>
+                        <tr className="border-b">
+                          <td className="py-3 pr-4">Super Habanero</td>
+                          <td className="py-3 pr-4">1,000</td>
+                          <td className="py-3 pr-4">₦11,000/kg</td>
+                          <td className="py-3">₦33,000,000</td>
+                        </tr>
+                        <tr>
+                          <td className="py-3 pr-4 font-semibold text-gray-900">Total</td>
+                          <td className="py-3 pr-4">2,000</td>
+                          <td className="py-3 pr-4">—</td>
+                          <td className="py-3 font-semibold text-green-700">₦48,000,000</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div className="mb-8 space-y-6">
+                  <div>
+                    <h4 className="text-base font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      <Crop className="w-4 h-4 text-green-600 shrink-0" />
+                      Bell Pepper
+                    </h4>
+                    <p className="text-sm text-gray-600 mb-3">
+                      Two dedicated greenhouse units (~500 plants each). High demand from supermarkets, hotels,
+                      restaurants, and food processors. Premium produce with strong commercial pricing.
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
+                        <Image
+                          src="/upcoming/Bell%20Peppers.webp"
+                          alt="Bell peppers in greenhouse rows"
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 640px) 100vw, 240px"
+                          unoptimized
+                        />
+                      </div>
+                      <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
+                        <Image
+                          src="/upcoming/peppersdisplay.png"
+                          alt="Bell peppers display"
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 640px) 100vw, 240px"
+                          unoptimized
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-base font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                      <Crop className="w-4 h-4 text-green-600 shrink-0" />
+                      Super Habanero
+                    </h4>
+                    <p className="text-sm text-gray-600 mb-3">
+                      Two dedicated greenhouse units (~500 plants each). A high-value pepper variety with strong
+                      demand across wholesale, food processing, and commercial buyers seeking consistent quality supply.
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
+                        <Image
+                          src="/upcoming/bell-pepper-greenhouse.png"
+                          alt="Bell peppers growing in greenhouse rows"
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 640px) 100vw, 240px"
+                          unoptimized
+                        />
+                      </div>
+                      <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
+                        <Image
+                          src="/upcoming/super-habanero-greenhouse.png"
+                          alt="Super Habanero greenhouse at Steaders8 Farm"
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 640px) 100vw, 240px"
+                          unoptimized
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-lg border border-green-100 bg-green-50/70 p-4 mb-8">
+                  <h4 className="text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                    <Lightbulb className="w-4 h-4 text-amber-500 shrink-0" />
+                    Message from the CEO
+                  </h4>
+                  <p className="text-sm text-gray-700 italic">
+                    &ldquo;Thank you for considering this opportunity. Your decision to partner with us is more than a
+                    financial contribution — it is a vote of confidence in a project built on strategy, sustainability,
+                    and guaranteed market demand. Together, we are creating value that grows beyond numbers.&rdquo;
+                  </p>
+                  <p className="text-sm font-medium text-gray-900 mt-2">— Iwewezinem Stephen</p>
+                </div>
+
+                <div className="mb-6">
+                  <h4 className="text-sm font-semibold text-gray-900 mb-3">Proposal &amp; Agreement</h4>
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      href="/documents/steaders8-proposal-greenhouse.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      download="Steaders8-Greenhouse-Expansion-Investment-Proposal.pdf"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-green-600 text-white text-sm font-medium hover:bg-green-700 transition-colors"
+                    >
+                      <FileText className="w-4 h-4" />
+                      Download Proposal (Greenhouse)
+                    </a>
+                    <a
+                      href="/documents/steaders8-proposal-greenhouse.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border-2 border-green-600 text-green-700 text-sm font-medium hover:bg-green-50 transition-colors"
+                    >
+                      <FileText className="w-4 h-4" />
+                      View Proposal
+                    </a>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-2">Open in a new tab to read or download the full proposal.</p>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Chat on WhatsApp"
+                    title="Chat on WhatsApp"
+                    className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-600 text-white shadow-md ring-1 ring-green-700/30 hover:bg-green-700 hover:scale-105 transition-transform"
+                  >
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                  </a>
+                  <a
+                    href={`tel:${PHONE_NUMBER}`}
+                    aria-label={`Call ${PHONE_NUMBER}`}
+                    title={PHONE_NUMBER}
+                    className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-600 text-white shadow-md ring-1 ring-emerald-700/30 hover:bg-emerald-700 hover:scale-105 transition-transform"
+                  >
+                    <Phone className="w-6 h-6" />
+                  </a>
+                </div>
+                <p className="text-xs text-gray-500 mt-3">
+                  Interested investors can contact Steaders8 via WhatsApp, email, or call.
+                </p>
+              </div>
+
               {/* Yam Farming */}
               <div
                 id="yam-farming"
@@ -147,10 +441,10 @@ export default function UpcomingInvestmentContent() {
                         </li>
                       </ul>
                     </div>
-                    <div className="inline-flex flex-col gap-1 rounded-lg bg-amber-50 border border-amber-200 px-4 py-3 mb-6">
-                      <span className="text-sm font-medium text-amber-800">Investment window closes</span>
-                      <span className="text-lg font-bold text-amber-900">8th May 2026</span>
-                      <span className="text-sm text-amber-700">for the year 2026</span>
+                    <div className="inline-flex flex-col gap-1 rounded-lg bg-gray-100 border border-gray-300 px-4 py-3 mb-6">
+                      <span className="text-sm font-medium text-gray-700">Closed</span>
+                      <span className="text-lg font-bold text-gray-900">8th May 2026</span>
+                      <span className="text-sm text-gray-600">for the year 2026</span>
                     </div>
                     {/* Documents */}
                     <div className="mb-6">
@@ -190,14 +484,6 @@ export default function UpcomingInvestmentContent() {
                         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
                           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                         </svg>
-                      </a>
-                      <a
-                        href={`mailto:${EMAIL_ADDRESS}`}
-                        aria-label={`Email ${EMAIL_ADDRESS}`}
-                        title={EMAIL_ADDRESS}
-                        className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-slate-900 text-white shadow-md ring-1 ring-slate-900/30 hover:bg-slate-800 hover:scale-105 transition-transform"
-                      >
-                        <Mail className="w-6 h-6" />
                       </a>
                       <a
                         href={`tel:${PHONE_NUMBER}`}
@@ -260,7 +546,7 @@ export default function UpcomingInvestmentContent() {
                     </div>
                     <div className="inline-flex flex-col gap-1 rounded-lg bg-green-50 border border-green-200 px-4 py-3 mb-6">
                       <span className="text-sm font-medium text-green-800">Investment window is open</span>
-                      <span className="text-lg font-bold text-green-900">Round the year</span>
+                      <span className="text-lg font-bold text-green-900">Year-round</span>
                     </div>
                     {/* Documents */}
                     <div className="mb-6">
@@ -280,14 +566,6 @@ export default function UpcomingInvestmentContent() {
                         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
                           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                         </svg>
-                      </a>
-                      <a
-                        href={`mailto:${EMAIL_ADDRESS}`}
-                        aria-label={`Email ${EMAIL_ADDRESS}`}
-                        title={EMAIL_ADDRESS}
-                        className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-slate-900 text-white shadow-md ring-1 ring-slate-900/30 hover:bg-slate-800 hover:scale-105 transition-transform"
-                      >
-                        <Mail className="w-6 h-6" />
                       </a>
                       <a
                         href={`tel:${PHONE_NUMBER}`}
@@ -350,7 +628,7 @@ export default function UpcomingInvestmentContent() {
                     </div>
                     <div className="inline-flex flex-col gap-1 rounded-lg bg-green-50 border border-green-200 px-4 py-3 mb-6">
                       <span className="text-sm font-medium text-green-800">Investment window is open</span>
-                      <span className="text-lg font-bold text-green-900">Round the year</span>
+                      <span className="text-lg font-bold text-green-900">Year-round</span>
                     </div>
                     {/* Documents */}
                     <div className="mb-6">
@@ -372,14 +650,6 @@ export default function UpcomingInvestmentContent() {
                         </svg>
                       </a>
                       <a
-                        href={`mailto:${EMAIL_ADDRESS}`}
-                        aria-label={`Email ${EMAIL_ADDRESS}`}
-                        title={EMAIL_ADDRESS}
-                        className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-slate-900 text-white shadow-md ring-1 ring-slate-900/30 hover:bg-slate-800 hover:scale-105 transition-transform"
-                      >
-                        <Mail className="w-6 h-6" />
-                      </a>
-                      <a
                         href={`tel:${PHONE_NUMBER}`}
                         aria-label={`Call ${PHONE_NUMBER}`}
                         title={PHONE_NUMBER}
@@ -399,11 +669,11 @@ export default function UpcomingInvestmentContent() {
 
           {tab === 'upcoming' && (
             <>
+              <h2 className="font-serif text-xl font-bold text-gray-900 mb-6">Upcoming opportunities</h2>
               {/* Opportunity selector */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
                 {(
                   [
-                    { id: 'greenhouse' as const, label: 'Build a Greenhouse' },
                     { id: 'biogas' as const, label: 'Biogas Plant' },
                     { id: 'truck' as const, label: 'Purchase a Transport Truck' },
                     { id: 'supermarket' as const, label: 'Steaders8 Greenhouse Supermarket' },
@@ -424,488 +694,6 @@ export default function UpcomingInvestmentContent() {
                 ))}
               </div>
 
-              {/* Greenhouse */}
-              {opportunity === 'greenhouse' && (
-                <div className="space-y-10">
-                  {/* Image grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-100 shadow-md">
-                      <Image
-                        src="/upcoming/greenhouse-5.png"
-                        alt="Steaders8 greenhouse structure"
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 640px) 100vw, 280px"
-                        unoptimized
-                      />
-                    </div>
-                    <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-100 shadow-md">
-                      <Image
-                        src="/upcoming/greenhouse-6.png"
-                        alt="Greenhouse crops and growing area"
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 640px) 100vw, 280px"
-                        unoptimized
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-8">
-                    <div>
-                      <h2 className="font-serif text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                        <Sprout className="w-7 h-7 text-green-600 shrink-0" />
-                        Invest in a Modern Greenhouse Farm
-                      </h2>
-                      <p className="text-gray-600 mb-4">
-                        We are building a 1-acre commercial greenhouse valued at ₦30,000,000 designed to produce high-value
-                        vegetables such as Tomatoes &amp; Bell Peppers year-round.
-                      </p>
-                      <p className="text-gray-600 mb-4">
-                        Unlike traditional farming, greenhouse agriculture uses controlled environments, drip irrigation, and
-                        precision nutrients to produce 3–5x higher yields with predictable harvests.
-                      </p>
-                      <p className="text-gray-600">
-                        Your investment helps build the greenhouse and gives you a share in the profits from the harvest.
-                      </p>
-                    </div>
-
-                    <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                      <Sprout className="w-5 h-5 text-green-600 shrink-0" />
-                      Greenhouse Investment Goal
-                    </h3>
-                      <div className="grid gap-2 text-sm text-gray-600">
-                        <p>
-                          <span className="font-semibold text-gray-900">Total Required:</span> ₦30,000,000
-                        </p>
-                        <p>
-                          <span className="font-semibold text-gray-900">Project:</span> 1 Acre Greenhouse
-                        </p>
-                        <p>
-                          <span className="font-semibold text-gray-900">Crops:</span> Tomatoes &amp; Bell Peppers
-                        </p>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                      <Coins className="w-5 h-5 text-green-600 shrink-0" />
-                      Investment Tiers
-                    </h3>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="rounded-xl border-2 border-gray-200 bg-white p-6 shadow-sm hover:border-green-200 hover:shadow-md transition-all">
-                          <div className="mb-4">
-                            <h4 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                            <Medal className="w-5 h-5 text-amber-600 shrink-0" />
-                            Bronze Partner
-                          </h4>
-                            <p className="text-sm text-gray-500">Investment: ₦2,000,000</p>
-                            <p className="text-sm text-gray-500">Slots Available: 10 investors</p>
-                            <p className="text-sm text-gray-500">Total Contribution: ₦20,000,000</p>
-                          </div>
-                          <h5 className="text-sm font-semibold text-gray-900 mb-2">Benefits</h5>
-                          <ul className="space-y-3 text-sm text-gray-600">
-                            <li className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                              Share in harvest profits
-                            </li>
-                            <li className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                              Quarterly farm report
-                            </li>
-                            <li className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                              Invitation to farm visit
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="rounded-xl border-2 border-green-300 bg-green-50/50 p-6 shadow-sm hover:border-green-400 hover:shadow-md transition-all">
-                          <div className="mb-4">
-                            <h4 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                            <Medal className="w-5 h-5 text-gray-400 shrink-0" />
-                            Silver Partner
-                          </h4>
-                            <p className="text-sm text-gray-500">Investment: ₦3,000,000</p>
-                            <p className="text-sm text-gray-500">Slots Available: 3 investors</p>
-                            <p className="text-sm text-gray-500">Total Contribution: ₦9,000,000</p>
-                          </div>
-                          <h5 className="text-sm font-semibold text-gray-900 mb-2">Benefits</h5>
-                          <ul className="space-y-3 text-sm text-gray-600">
-                            <li className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                              Everything in Bronze
-                            </li>
-                            <li className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                              Larger profit share
-                            </li>
-                            <li className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                              Annual supply of tomatoes or bell peppers
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="rounded-xl border-2 border-green-500 bg-green-50/70 p-6 shadow-md hover:border-green-600 hover:shadow-lg transition-all">
-                          <div className="mb-4">
-                            <h4 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                            <Medal className="w-5 h-5 text-amber-500 shrink-0" />
-                            Gold Partner
-                          </h4>
-                            <p className="text-sm text-gray-500">Investment: ₦5,000,000</p>
-                            <p className="text-sm text-gray-500">Slots Available: 1 investor</p>
-                            <p className="text-sm text-gray-500">Total Contribution: ₦5,000,000</p>
-                          </div>
-                          <h5 className="text-sm font-semibold text-gray-900 mb-2">Benefits</h5>
-                          <ul className="space-y-3 text-sm text-gray-600">
-                            <li className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                              Everything in Silver
-                            </li>
-                            <li className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                              Premium harvest share
-                            </li>
-                            <li className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                              Priority access to future greenhouse investments
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                      <Sprout className="w-5 h-5 text-green-600 shrink-0" />
-                      Greenhouse Investor Returns by Tier
-                    </h3>
-                      <div className="overflow-x-auto">
-                        <table className="min-w-full text-sm text-left text-gray-600">
-                          <thead className="text-xs uppercase text-gray-500 border-b">
-                            <tr>
-                              <th className="py-2 pr-4 font-semibold">Tier</th>
-                              <th className="py-2 pr-4 font-semibold">Investment</th>
-                              <th className="py-2 font-semibold">Fixed Return (per year)</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr className="border-b">
-                              <td className="py-3 pr-4">
-                                <span className="inline-flex items-center gap-1.5">
-                                  <Circle className="w-3.5 h-3.5 text-green-600 fill-green-600 shrink-0" />
-                                  Starter
-                                </span>
-                              </td>
-                              <td className="py-3 pr-4">₦500,000</td>
-                              <td className="py-3">10%</td>
-                            </tr>
-                            <tr className="border-b">
-                              <td className="py-3 pr-4">
-                                <span className="inline-flex items-center gap-1.5">
-                                  <Medal className="w-3.5 h-3.5 text-gray-400 shrink-0" />
-                                  Silver
-                                </span>
-                              </td>
-                              <td className="py-3 pr-4">₦1,000,000</td>
-                              <td className="py-3">12%</td>
-                            </tr>
-                            <tr className="border-b">
-                              <td className="py-3 pr-4">
-                                <span className="inline-flex items-center gap-1.5">
-                                  <Medal className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                                  Gold
-                                </span>
-                              </td>
-                              <td className="py-3 pr-4">₦3,000,000</td>
-                              <td className="py-3">15%</td>
-                            </tr>
-                            <tr>
-                              <td className="py-3 pr-4">
-                                <span className="inline-flex items-center gap-1.5">
-                                  <Gem className="w-3.5 h-3.5 text-violet-500 shrink-0" />
-                                  Platinum
-                                </span>
-                              </td>
-                              <td className="py-3 pr-4">₦6,000,000</td>
-                              <td className="py-3">18%</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-
-                    <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                      <BarChart3 className="w-5 h-5 text-green-600 shrink-0" />
-                      Funding Progress
-                    </h3>
-                      <p className="text-sm text-gray-600">Greenhouse Construction Goal</p>
-                      <p className="text-2xl font-bold text-gray-900 mt-1">₦30,000,000</p>
-                      <div className="mt-4 h-3 rounded-full bg-gray-200 overflow-hidden">
-                        <div className="h-full bg-green-600" style={{ width: '0%' }} />
-                      </div>
-                      <div className="mt-3 flex flex-wrap gap-4 text-sm text-gray-600">
-                        <span className="font-semibold text-green-700">0% Funded</span>
-                        <span>₦0 Raised</span>
-                        <span>₦30,000,000 Remaining</span>
-                      </div>
-                      <p className="text-sm text-gray-600 mt-3">
-                        Once funding is completed, greenhouse construction begins immediately.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                      <Rocket className="w-5 h-5 text-green-600 shrink-0" />
-                      Why Invest in This Greenhouse?
-                    </h3>
-                      <ul className="space-y-2 text-sm text-gray-600">
-                        <li className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                          <span>High demand market for daily-consumed vegetables</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                          <span>Higher yields with 3–5x production vs open-field farming</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                          <span>Lower risk with controlled environment agriculture</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                          <span>Multiple harvests yearly for steady cash flow</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                          <span>Sustainable water and nutrient management</span>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                      <Search className="w-5 h-5 text-green-600 shrink-0" />
-                      Transparency for Investors
-                    </h3>
-                      <ul className="space-y-2 text-sm text-gray-600">
-                        <li className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                          <span>Quarterly farm reports</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                          <span>Production updates</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                          <span>Financial performance reports</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                          <span>Harvest updates and photos</span>
-                        </li>
-                        <li className="flex items-start gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                          <span>Optional farm visits</span>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div className="rounded-xl border border-green-100 bg-green-50/70 p-6">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
-                      <Wheat className="w-5 h-5 text-green-600 shrink-0" />
-                      Be Part of the Future of Agriculture
-                    </h3>
-                      <p className="text-sm text-gray-700">
-                        By investing in this greenhouse, you are not only earning profits but also contributing to food
-                        security, job creation, and sustainable agriculture in Nigeria. Secure your investment tier today
-                        and grow with us.
-                      </p>
-                    </div>
-
-                    <div className="space-y-6">
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
-                        <Sprout className="w-5 h-5 text-green-600 shrink-0" />
-                        Greenhouse Crop Focus
-                      </h3>
-                        <p className="text-sm text-gray-600">
-                          Our greenhouse will specialize in the cultivation of premium tomatoes and bell peppers, two of the
-                          most profitable greenhouse crops in Nigeria.
-                        </p>
-                      </div>
-
-                      <div className="space-y-4">
-                        <h4 className="text-base font-semibold text-gray-900 flex items-center gap-2">
-                        <Crop className="w-4 h-4 text-green-600 shrink-0" />
-                        Tomatoes
-                      </h4>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                          <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
-                            <Image
-                              src="/upcoming/cluster_of_tomatoes_on_the_vine.webp"
-                              alt="Cluster of tomatoes on the vine"
-                              fill
-                              className="object-cover"
-                              sizes="(max-width: 640px) 100vw, 240px"
-                              unoptimized
-                            />
-                          </div>
-                          <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
-                            <Image
-                              src="/upcoming/Could-Growing-Tomatoes-Indoors-Be-the-Answer-to-a-Drought-Ridden-World-7d098e47c5fc483bb51ab2fb7aa38034.jpg"
-                              alt="Tomatoes growing indoors in a greenhouse"
-                              fill
-                              className="object-cover"
-                              sizes="(max-width: 640px) 100vw, 240px"
-                              unoptimized
-                            />
-                          </div>
-                          <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
-                            <Image
-                              src="/upcoming/Tomatoes%20in%20a%20commercial%20greenhouse-1.webp"
-                              alt="Tomatoes in a commercial greenhouse"
-                              fill
-                              className="object-cover"
-                              sizes="(max-width: 640px) 100vw, 240px"
-                              unoptimized
-                            />
-                          </div>
-                        </div>
-                        <p className="text-sm text-gray-600">
-                          Tomatoes are one of the most consumed vegetables in Nigeria, used daily in homes, restaurants, and
-                          food processing.
-                        </p>
-                        <div>
-                          <h5 className="text-sm font-semibold text-gray-900 mb-2">Greenhouse Advantages</h5>
-                          <ul className="space-y-2 text-sm text-gray-600">
-                            <li className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                              Higher yield than open-field farming
-                            </li>
-                            <li className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                              Consistent quality and size
-                            </li>
-                            <li className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                              Reduced pest damage
-                            </li>
-                            <li className="flex items-start gap-2">
-                              <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                              Multiple harvest cycles yearly
-                            </li>
-                          </ul>
-                        </div>
-                        <p className="text-sm text-gray-600">
-                          <span className="font-semibold text-gray-900">Average Market Price:</span> ₦800 – ₦1,200 per kg
-                        </p>
-                      </div>
-
-                      <div className="space-y-4">
-                        <h4 className="text-base font-semibold text-gray-900 flex items-center gap-2">
-                        <Crop className="w-4 h-4 text-green-600 shrink-0" />
-                        Bell Peppers
-                      </h4>
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                          <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
-                            <Image
-                              src="/upcoming/Bell%20Peppers.webp"
-                              alt="Bell peppers in greenhouse rows"
-                              fill
-                              className="object-cover"
-                              sizes="(max-width: 640px) 100vw, 240px"
-                              unoptimized
-                            />
-                          </div>
-                          <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
-                            <Image
-                              src="/upcoming/peppersdisplay.png"
-                              alt="Sweet peppers display"
-                              fill
-                              className="object-cover"
-                              sizes="(max-width: 640px) 100vw, 240px"
-                              unoptimized
-                            />
-                          </div>
-                          <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-100">
-                            <Image
-                              src="/upcoming/Episode-44-Blog_729edaf3-7d99-44e0-be4d-0b46214640ef_780x.jpg"
-                              alt="Bell peppers growing in greenhouse"
-                              fill
-                              className="object-cover"
-                              sizes="(max-width: 640px) 100vw, 240px"
-                              unoptimized
-                            />
-                          </div>
-                        </div>
-                        <p className="text-sm text-gray-600 mb-2">
-                          Bell peppers (also called sweet peppers) are highly demanded by:
-                        </p>
-                        <ul className="space-y-2 text-sm text-gray-600">
-                          <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                            Supermarkets
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                            Hotels and restaurants
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                            Export vegetable buyers
-                          </li>
-                        </ul>
-                        <p className="text-sm text-gray-600">
-                          They command higher prices than most vegetables because they are considered premium produce.
-                        </p>
-                      </div>
-
-                      <div className="space-y-3">
-                        <h4 className="text-base font-semibold text-gray-900 flex items-center gap-2">
-                        <Rocket className="w-4 h-4 text-green-600 shrink-0" />
-                        Why Tomatoes &amp; Bell Peppers?
-                      </h4>
-                        <ul className="space-y-2 text-sm text-gray-600">
-                          <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                            Very high demand in Nigerian markets
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                            Premium prices compared to most vegetables
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                            Ideal crops for greenhouse farming
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                            High yield per square meter
-                          </li>
-                          <li className="flex items-start gap-2">
-                            <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
-                            Strong supply gap in supermarkets and hotels
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div className="rounded-lg border border-green-100 bg-green-50/70 p-4">
-                        <h4 className="text-sm font-semibold text-gray-900 mb-2 flex items-center gap-2">
-                        <Lightbulb className="w-4 h-4 text-amber-500 shrink-0" />
-                        Message from CEO to investors
-                      </h4>
-                        <p className="text-sm text-gray-700 italic">
-                          “Nigeria still imports and struggles with vegetable shortages. Our greenhouse will produce premium
-                          tomatoes and bell peppers year-round, supplying supermarkets, restaurants, and urban markets where
-                          demand is highest.”
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
 
               {/* Biogas Plant */}
               {opportunity === 'biogas' && (

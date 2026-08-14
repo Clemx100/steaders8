@@ -16,13 +16,48 @@ export function Investment() {
           </h2>
           <div className="w-16 h-1 bg-green-600 mx-auto mb-6" />
           <p className="text-lg text-gray-600 mb-8">
-            Join us in building the future of sustainable agriculture. Interested investors can chat with Steaders8 directly on WhatsApp.
+            Join us in building the future of sustainable agriculture. Browse crop farming or livestock farming to see open and upcoming opportunities.
           </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 gap-4 mb-12">
+          <Link
+            href="/crop-farming"
+            className="rounded-xl border-2 border-green-200 bg-white p-5 hover:border-green-400 transition-all"
+          >
+            <h3 className="font-semibold text-gray-900 mb-1">Crop Farming</h3>
+            <p className="text-sm text-gray-600">Greenhouse, yam, cucumber, and sweet corn.</p>
+          </Link>
+          <Link
+            href="/livestock-farming"
+            className="rounded-xl border-2 border-green-300 bg-green-50 p-5 hover:border-green-500 transition-all"
+          >
+            <h3 className="font-semibold text-gray-900 mb-1">Livestock Farming</h3>
+            <p className="text-sm text-gray-600">Goat farming (open) and shrimp farming (upcoming).</p>
+          </Link>
         </div>
 
         {/* Ongoing investments */}
         <div className="mb-10 space-y-4">
           <h3 className="text-xl font-bold text-gray-900 mb-4">Ongoing investments</h3>
+          <Link
+            href="/upcoming-investment?tab=ongoing#greenhouse-expansion"
+            className="block rounded-xl border-2 border-green-300 bg-gradient-to-br from-green-50 to-white p-6 shadow-sm hover:border-green-500 hover:shadow-md transition-all text-left"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <h4 className="font-semibold text-gray-900 text-lg">Greenhouse Expansion</h4>
+                <p className="text-gray-600 text-sm mt-1">
+                  Bell Pepper &amp; Super Habanero — controlled-environment production at Steaders8 Farm.
+                </p>
+                <div className="mt-3 inline-flex flex-col gap-0.5 rounded-lg bg-green-50 border border-green-200 px-3 py-2">
+                  <span className="text-xs font-medium text-green-800">Open now</span>
+                  <span className="text-sm font-bold text-green-900">Investment window is open</span>
+                </div>
+              </div>
+              <span className="text-green-600 font-medium text-sm shrink-0">View details →</span>
+            </div>
+          </Link>
           <Link
             href="/upcoming-investment?tab=ongoing#yam-farming"
             className="block rounded-xl border-2 border-green-200 bg-white p-6 shadow-sm hover:border-green-400 hover:shadow-md transition-all text-left"
@@ -30,10 +65,28 @@ export function Investment() {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <h4 className="font-semibold text-gray-900 text-lg">Yam Farming</h4>
-                <p className="text-gray-600 text-sm mt-1">Investment window for 2026 season — open now.</p>
-                <div className="mt-3 inline-flex flex-col gap-0.5 rounded-lg bg-amber-50 border border-amber-200 px-3 py-2">
-                  <span className="text-xs font-medium text-amber-800">Closes</span>
-                  <span className="text-sm font-bold text-amber-900">8th May 2026</span>
+                <p className="text-gray-600 text-sm mt-1">Investment window for 2026 season has closed.</p>
+                <div className="mt-3 inline-flex flex-col gap-0.5 rounded-lg bg-gray-100 border border-gray-300 px-3 py-2">
+                  <span className="text-xs font-medium text-gray-700">Closed</span>
+                  <span className="text-sm font-bold text-gray-900">8th May 2026</span>
+                </div>
+              </div>
+              <span className="text-green-600 font-medium text-sm shrink-0">View details →</span>
+            </div>
+          </Link>
+          <Link
+            href="/livestock-farming#goat-farming"
+            className="block rounded-xl border-2 border-green-200 bg-white p-6 shadow-sm hover:border-green-400 hover:shadow-md transition-all text-left"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <h4 className="font-semibold text-gray-900 text-lg">Goat Farming</h4>
+                <p className="text-gray-600 text-sm mt-1">
+                  Livestock farming for meat and breeding markets. Contact Olisaemeka Uzoka to invest.
+                </p>
+                <div className="mt-3 inline-flex flex-col gap-0.5 rounded-lg bg-green-50 border border-green-200 px-3 py-2">
+                  <span className="text-xs font-medium text-green-800">Open</span>
+                  <span className="text-sm font-bold text-green-900">Year-round</span>
                 </div>
               </div>
               <span className="text-green-600 font-medium text-sm shrink-0">View details →</span>
@@ -46,10 +99,10 @@ export function Investment() {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <h4 className="font-semibold text-gray-900 text-lg">Cucumber Farming</h4>
-                <p className="text-gray-600 text-sm mt-1">Investment window is open. Round the year.</p>
+                <p className="text-gray-600 text-sm mt-1">Investment window is open — year-round.</p>
                 <div className="mt-3 inline-flex flex-col gap-0.5 rounded-lg bg-green-50 border border-green-200 px-3 py-2">
                   <span className="text-xs font-medium text-green-800">Open</span>
-                  <span className="text-sm font-bold text-green-900">Round the year</span>
+                  <span className="text-sm font-bold text-green-900">Year-round</span>
                 </div>
               </div>
               <span className="text-green-600 font-medium text-sm shrink-0">View details →</span>
@@ -62,10 +115,33 @@ export function Investment() {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
                 <h4 className="font-semibold text-gray-900 text-lg">Sweet Corn Farming</h4>
-                <p className="text-gray-600 text-sm mt-1">Investment window is open. Round the year.</p>
+                <p className="text-gray-600 text-sm mt-1">Investment window is open — year-round.</p>
                 <div className="mt-3 inline-flex flex-col gap-0.5 rounded-lg bg-green-50 border border-green-200 px-3 py-2">
                   <span className="text-xs font-medium text-green-800">Open</span>
-                  <span className="text-sm font-bold text-green-900">Round the year</span>
+                  <span className="text-sm font-bold text-green-900">Year-round</span>
+                </div>
+              </div>
+              <span className="text-green-600 font-medium text-sm shrink-0">View details →</span>
+            </div>
+          </Link>
+        </div>
+
+        {/* Upcoming investments */}
+        <div className="mb-10 space-y-4">
+          <h3 className="text-xl font-bold text-gray-900 mb-4">Upcoming investments</h3>
+          <Link
+            href="/livestock-farming#shrimp-farming"
+            className="block rounded-xl border-2 border-amber-200 bg-gradient-to-br from-amber-50/80 to-white p-6 shadow-sm hover:border-amber-400 hover:shadow-md transition-all text-left"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <h4 className="font-semibold text-gray-900 text-lg">Shrimp Farming</h4>
+                <p className="text-gray-600 text-sm mt-1">
+                  Livestock farming — commercial shrimp production under development.
+                </p>
+                <div className="mt-3 inline-flex flex-col gap-0.5 rounded-lg bg-amber-50 border border-amber-200 px-3 py-2">
+                  <span className="text-xs font-medium text-amber-800">Upcoming</span>
+                  <span className="text-sm font-bold text-amber-900">Investment opening soon</span>
                 </div>
               </div>
               <span className="text-green-600 font-medium text-sm shrink-0">View details →</span>

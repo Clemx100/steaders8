@@ -1,22 +1,23 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import { InvestmentAlertTicker } from '@/components/investment-alert'
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
 
   const navLinks: { href: string; label: string; isButton?: boolean }[] = [
     { href: '/#about', label: 'About' },
-    { href: '/#products', label: 'Products' },
-    { href: '/#updates', label: 'Updates' },
+    { href: '/crop-farming', label: 'Crops' },
+    { href: '/livestock-farming', label: 'Livestock' },
     { href: '/invest', label: 'Invest', isButton: true },
   ]
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200">
+      <InvestmentAlertTicker />
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-1.5">
