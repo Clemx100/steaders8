@@ -1,11 +1,15 @@
 'use client'
 
 import Link from 'next/link'
+import { LayoutDashboard, Plus } from 'lucide-react'
+import { useInvestorSession } from '@/components/portal/use-investor-session'
 
 const WHATSAPP_NUMBER = '2348131074911' // 08131074911 with Nigeria code
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`
 
 export function Investment() {
+  const session = useInvestorSession()
+
   return (
     <section id="invest" className="py-20 px-4 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="max-w-4xl mx-auto">
@@ -147,6 +151,63 @@ export function Investment() {
               <span className="text-green-600 font-medium text-sm shrink-0">View details →</span>
             </div>
           </Link>
+        </div>
+
+        {/* Investor portal CTA */}
+        <div
+          className={`mb-10 rounded-2xl bg-gradient-to-br from-green-800 to-emerald-600 p-8 text-white shadow-lg flex flex-col md:flex-row md:items-center md:justify-between gap-6 transition-opacity ${
+            session === 'loading' ? 'opacity-0' : 'opacity-100'
+          }`}
+        >
+          {session === 'signed-in' ? (
+            <>
+              <div>
+                <h3 className="text-xl font-semibold mb-1">Welcome back, investor</h3>
+                <p className="text-green-50/90 text-sm max-w-md">
+                  Follow your crops from planting to market, check your returns, or add a new investment.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+                <Link
+                  href="/investor/dashboard"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-white text-green-800 font-semibold hover:bg-green-50 transition-colors"
+                >
+                  <LayoutDashboard className="w-4 h-4" />
+                  My Dashboard
+                </Link>
+                <Link
+                  href="/investor/dashboard?add=new"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-white/60 text-white font-semibold hover:bg-white/10 transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  Add investment
+                </Link>
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                <h3 className="text-xl font-semibold mb-1">Already invested with Steaders8?</h3>
+                <p className="text-green-50/90 text-sm max-w-md">
+                  Register on the investor portal to follow your crops from planting to market and track your returns.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+                <Link
+                  href="/investor/register"
+                  className="inline-flex items-center justify-center px-5 py-3 rounded-lg bg-white text-green-800 font-semibold hover:bg-green-50 transition-colors"
+                >
+                  Register as investor
+                </Link>
+                <Link
+                  href="/investor/login"
+                  className="inline-flex items-center justify-center px-5 py-3 rounded-lg border border-white/60 text-white font-semibold hover:bg-white/10 transition-colors"
+                >
+                  Investor login
+                </Link>
+              </div>
+            </>
+          )}
         </div>
 
         {/* WhatsApp CTA */}

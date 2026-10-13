@@ -6,6 +6,7 @@ import { Footer } from '@/components/footer'
 import { FarmingNav } from '@/components/farming-nav'
 import { WhatsAppIcon } from '@/components/whatsapp-icon'
 import { LIVESTOCK_CONTACT } from '@/lib/contacts'
+import { InvestCta } from '@/components/portal/invest-cta'
 
 export default function LivestockFarmingPage() {
   return (
@@ -104,6 +105,8 @@ export default function LivestockFarmingPage() {
                 </a>
               </div>
             </div>
+
+            <InvestCta projectSlug="goat" />
           </div>
 
           <div

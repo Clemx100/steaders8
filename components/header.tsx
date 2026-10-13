@@ -4,14 +4,19 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { InvestmentAlertTicker } from '@/components/investment-alert'
+import { useInvestorSession } from '@/components/portal/use-investor-session'
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const signedIn = useInvestorSession() === 'signed-in'
 
   const navLinks: { href: string; label: string; isButton?: boolean }[] = [
     { href: '/#about', label: 'About' },
     { href: '/crop-farming', label: 'Crops' },
     { href: '/livestock-farming', label: 'Livestock' },
+    signedIn
+      ? { href: '/investor/dashboard', label: 'My Dashboard' }
+      : { href: '/investor/login', label: 'Investor Login' },
     { href: '/invest', label: 'Invest', isButton: true },
   ]
 

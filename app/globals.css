@@ -26,6 +26,96 @@ body {
   }
 }
 
+/* Investor portal growth-stage animations */
+.s8-grow, .s8-grow-once, .s8-sway, .s8-bob, .s8-pop, .s8-drive, .s8-spin-slow, .s8-float, .s8-drip, .s8-pulse-ring {
+  transform-box: fill-box;
+}
+.s8-grow {
+  transform-origin: 50% 100%;
+  animation: s8-grow 3.2s ease-out infinite;
+}
+.s8-grow-once {
+  transform-origin: 50% 100%;
+  animation: s8-grow-once 1.6s ease-out both;
+}
+.s8-sway {
+  transform-origin: 50% 100%;
+  animation: s8-sway 3.5s ease-in-out infinite;
+}
+.s8-bob {
+  animation: s8-bob 1.6s ease-in-out infinite;
+}
+.s8-pop {
+  transform-origin: 50% 50%;
+  animation: s8-pop 2.4s ease-in-out infinite;
+}
+.s8-drive {
+  animation: s8-drive 5s linear infinite;
+}
+.s8-spin-slow {
+  transform-origin: 50% 50%;
+  animation: s8-spin 18s linear infinite;
+}
+.s8-float {
+  animation: s8-float 2.8s ease-in infinite;
+}
+.s8-drip {
+  animation: s8-drip 1.8s ease-in infinite;
+}
+.s8-pulse-ring {
+  transform-origin: 50% 50%;
+  animation: s8-pulse-ring 2.2s ease-out infinite;
+}
+
+@keyframes s8-grow {
+  0% { transform: scaleY(0.05); opacity: 0.4; }
+  55%, 85% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+@keyframes s8-grow-once {
+  from { transform: scale(0.2); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes s8-sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+@keyframes s8-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+@keyframes s8-pop {
+  0%, 100% { transform: scale(0.85); }
+  50% { transform: scale(1.08); }
+}
+@keyframes s8-drive {
+  0% { transform: translateX(-120px); }
+  100% { transform: translateX(240px); }
+}
+@keyframes s8-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes s8-float {
+  0% { transform: translateY(8px); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translateY(-34px); opacity: 0; }
+}
+@keyframes s8-drip {
+  0% { transform: translateY(0); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(14px); opacity: 0; }
+}
+@keyframes s8-pulse-ring {
+  0% { transform: scale(0.7); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s8-grow, .s8-sway, .s8-bob, .s8-pop, .s8-drive, .s8-spin-slow, .s8-float, .s8-drip, .s8-pulse-ring {
+    animation: none;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
+import { InvestCta } from '@/components/portal/invest-cta'
 import {
   ArrowLeft,
   CheckCircle,
@@ -207,7 +208,7 @@ export default function UpcomingInvestmentContent() {
                   <div className="rounded-xl border border-gray-200 bg-white p-6">
                     <h4 className="text-sm font-semibold text-gray-900 mb-3">Phase One Scope</h4>
                     <ul className="space-y-2 text-sm text-gray-600">
-                      <li><span className="font-medium text-gray-900">Greenhouses:</span> 4 units (10 m Ã— 30 m each, ~1,200 mÂ² total)</li>
+                      <li><span className="font-medium text-gray-900">Greenhouses:</span> 4 units (10 m × 30 m each, ~1,200 m² total)</li>
                       <li><span className="font-medium text-gray-900">Total plants:</span> ~2,000 per cycle</li>
                       <li><span className="font-medium text-gray-900">Expected yield:</span> ~3 kg per plant (~6,000 kg total)</li>
                       <li><span className="font-medium text-gray-900">Cycle:</span> ~6 months (plus setup and sales time)</li>
@@ -370,6 +371,8 @@ export default function UpcomingInvestmentContent() {
                   </div>
                   <p className="text-xs text-gray-500 mt-2">Open in a new tab to read or download the full proposal.</p>
                 </div>
+
+                <InvestCta projectSlug="greenhouse" className="mb-6" />
 
                 <div className="flex items-center gap-3">
                   <a
@@ -553,6 +556,7 @@ export default function UpcomingInvestmentContent() {
                       <h4 className="text-sm font-semibold text-gray-900 mb-3">Proposal & Agreement</h4>
                       <p className="text-sm text-gray-600">Documents coming soon.</p>
                     </div>
+                    <InvestCta projectSlug="cucumber" className="mb-6" />
                     {/* Contact */}
                     <div className="flex items-center gap-3">
                       <a
@@ -635,6 +639,7 @@ export default function UpcomingInvestmentContent() {
                       <h4 className="text-sm font-semibold text-gray-900 mb-3">Proposal & Agreement</h4>
                       <p className="text-sm text-gray-600">Documents coming soon.</p>
                     </div>
+                    <InvestCta projectSlug="sweet-corn" className="mb-6" />
                     {/* Contact */}
                     <div className="flex items-center gap-3">
                       <a
