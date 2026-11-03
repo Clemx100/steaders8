@@ -97,7 +97,7 @@ export function InvestmentCertificate({
           <div className="flex flex-col items-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/certificate-seal.png?v=1"
+              src="/certificate-seal.png?v=2"
               alt="Steaders8 Farm official seal"
               className="h-[88px] w-[88px] object-contain drop-shadow-sm"
             />
