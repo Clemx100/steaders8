@@ -90,25 +90,36 @@ export function RegisterForm() {
   async function onSubmit(values: FormValues) {
     setServerError('')
     const { password, confirm_password: _confirm, email, ...details } = values
-    const supabase = createClient()
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: details,
-        emailRedirectTo: `${window.location.origin}/auth/callback?next=/investor/pending`,
-      },
-    })
-    if (error) {
-      setServerError(error.message)
-      return
+    try {
+      const supabase = createClient()
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: details,
+          emailRedirectTo: `${window.location.origin}/auth/callback?next=/investor/pending`,
+        },
+      })
+      if (error) {
+        setServerError(error.message)
+        return
+      }
+      if (!data.session) {
+        setNeedsEmailConfirm(true)
+        return
+      }
+      router.replace('/investor/pending')
+      router.refresh()
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Could not reach the server'
+      if (/failed to fetch|networkerror|load failed/i.test(message)) {
+        setServerError(
+          'Could not reach Supabase. Check your internet connection, disable blockers for this site, and confirm NEXT_PUBLIC_SUPABASE_URL is set.',
+        )
+        return
+      }
+      setServerError(message)
     }
-    if (!data.session) {
-      setNeedsEmailConfirm(true)
-      return
-    }
-    router.replace('/investor/pending')
-    router.refresh()
   }
 
   if (needsEmailConfirm) {

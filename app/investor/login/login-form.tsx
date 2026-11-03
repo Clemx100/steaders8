@@ -22,10 +22,21 @@ export function LoginForm() {
     e.preventDefault()
     setLoading(true)
     setError('')
-    const supabase = createClient()
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) {
-      setError(error.message === 'Invalid login credentials' ? 'Incorrect email or password.' : error.message)
+    try {
+      const supabase = createClient()
+      const { error } = await supabase.auth.signInWithPassword({ email, password })
+      if (error) {
+        setError(error.message === 'Invalid login credentials' ? 'Incorrect email or password.' : error.message)
+        setLoading(false)
+        return
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Could not reach the server'
+      setError(
+        /failed to fetch|networkerror|load failed/i.test(message)
+          ? 'Could not reach Supabase. Check your internet connection and disable blockers for this site.'
+          : message,
+      )
       setLoading(false)
       return
     }
