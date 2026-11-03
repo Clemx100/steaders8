@@ -10,6 +10,7 @@ import { InvestorsTab } from './investors-tab'
 import { InvestmentsTab } from './investments-tab'
 import { SeasonsTab } from './seasons-tab'
 import { PayoutsTab } from './payouts-tab'
+import { VerifyTab } from './verify-tab'
 
 const REFRESH_MS = 60_000
 
@@ -68,6 +69,9 @@ export function AdminDashboard({ data }: { data: AdminData }) {
           <TabsTrigger value="payouts" className="data-[state=active]:bg-green-600 data-[state=active]:text-white">
             Payouts
           </TabsTrigger>
+          <TabsTrigger value="verify" className="data-[state=active]:bg-green-600 data-[state=active]:text-white">
+            Verify QR
+          </TabsTrigger>
         </TabsList>
         <TabsContent value="investors" className="mt-4">
           <InvestorsTab profiles={data.profiles} investments={data.investments} />
@@ -80,6 +84,9 @@ export function AdminDashboard({ data }: { data: AdminData }) {
         </TabsContent>
         <TabsContent value="payouts" className="mt-4">
           <PayoutsTab projects={data.projects} investments={data.investments} payouts={data.payouts} />
+        </TabsContent>
+        <TabsContent value="verify" className="mt-4">
+          <VerifyTab />
         </TabsContent>
       </Tabs>
     </main>

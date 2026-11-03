@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { Loader2, Lock, Mail } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
+import { PasswordInput } from '@/components/ui/password-input'
 
 const DENIED_MESSAGE = 'This account does not have admin access.'
 
@@ -39,7 +40,7 @@ export function AdminLoginForm() {
   }
 
   const inputClass =
-    'w-full rounded-xl border border-slate-700 bg-slate-900/80 py-3 pl-10 pr-3 text-sm text-white placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30'
+    'h-auto w-full rounded-xl border border-slate-700 bg-slate-900/80 py-3 pl-10 pr-10 text-sm text-white placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus-visible:ring-emerald-500/30'
 
   return (
     <form onSubmit={onSubmit} className="space-y-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-2xl backdrop-blur sm:p-8">
@@ -65,15 +66,15 @@ export function AdminLoginForm() {
           Password
         </label>
         <div className="relative">
-          <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
-          <input
+          <Lock className="pointer-events-none absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-slate-500" />
+          <PasswordInput
             id="admin-password"
-            type="password"
             autoComplete="current-password"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className={inputClass}
+            toggleClassName="text-slate-500 hover:text-slate-200"
           />
         </div>
       </div>

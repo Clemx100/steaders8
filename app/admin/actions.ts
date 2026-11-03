@@ -2,7 +2,8 @@
 
 import { revalidatePath } from 'next/cache'
 import { createClient } from '@/lib/supabase/server'
-import { STAGE_META, type SeasonStage } from '@/lib/portal'
+import { STAGE_META, formatNaira, type SeasonStage } from '@/lib/portal'
+import { generateCertificateCode, parseCertificateScan } from '@/lib/certificate'
 
 export type ActionResult = { ok: true } | { ok: false; error: string }
 
@@ -44,7 +45,7 @@ export async function confirmInvestment(investmentId: string) {
   return run(async (supabase) => {
     const { data: investment, error: findError } = await supabase
       .from('investments')
-      .select('project_id')
+      .select('id, project_id, certificate_code, project:projects(slug)')
       .eq('id', investmentId)
       .single()
     if (findError || !investment) return 'Investment not found'
@@ -57,12 +58,122 @@ export async function confirmInvestment(investmentId: string) {
       .maybeSingle()
     if (!season) return 'This project has no current season. Create one in the Seasons tab first.'
 
+    const project = investment.project as { slug: string } | { slug: string }[] | null
+    const slug = Array.isArray(project) ? project[0]?.slug : project?.slug
+    const confirmedAt = new Date().toISOString()
+    const certificateCode =
+      investment.certificate_code || generateCertificateCode(slug || 'INV', investment.id, confirmedAt)
+
+    const baseUpdate = {
+      status: 'confirmed' as const,
+      season_id: season.id,
+      confirmed_at: confirmedAt,
+      admin_note: '',
+    }
+
     const { error } = await supabase
       .from('investments')
-      .update({ status: 'confirmed', season_id: season.id, confirmed_at: new Date().toISOString(), admin_note: '' })
+      .update({ ...baseUpdate, certificate_code: certificateCode })
       .eq('id', investmentId)
+
+    if (error && /certificate_code/i.test(error.message)) {
+      const retry = await supabase.from('investments').update(baseUpdate).eq('id', investmentId)
+      return retry.error?.message ?? null
+    }
     return error?.message ?? null
   })
+}
+
+export type CertificateVerifyResult =
+  | {
+      valid: true
+      certificateCode: string
+      investorName: string
+      email: string
+      projectName: string
+      amountLabel: string
+      confirmedAt: string
+      seasonLabel: string | null
+    }
+  | { valid: false; reason: string }
+
+export async function verifyCertificateCode(raw: string): Promise<CertificateVerifyResult> {
+  try {
+    const supabase = await adminClient()
+    const code = parseCertificateScan(raw)
+    if (!code) {
+      return { valid: false, reason: 'Not a Steaders8 certificate code.' }
+    }
+
+    const selectCols =
+      'id, amount, status, confirmed_at, certificate_code, investor:profiles(full_name, email), project:projects(name, slug), season:seasons(label)'
+
+    let data: Record<string, unknown> | null = null
+    const byCode = await supabase.from('investments').select(selectCols).eq('certificate_code', code).maybeSingle()
+
+    if (byCode.error && /certificate_code/i.test(byCode.error.message)) {
+      const all = await supabase
+        .from('investments')
+        .select(
+          'id, amount, status, confirmed_at, investor:profiles(full_name, email), project:projects(name, slug), season:seasons(label)',
+        )
+        .eq('status', 'confirmed')
+      if (all.error) return { valid: false, reason: all.error.message }
+      data =
+        (all.data ?? []).find((row) => {
+          const project = row.project as { slug: string } | { slug: string }[] | null
+          const slug = Array.isArray(project) ? project[0]?.slug : project?.slug
+          return generateCertificateCode(slug || 'INV', row.id, row.confirmed_at) === code
+        }) ?? null
+    } else if (byCode.error) {
+      return { valid: false, reason: byCode.error.message }
+    } else {
+      data = byCode.data
+    }
+
+    if (!data) {
+      // Also try deterministic match even when column exists but code was never stored
+      const all = await supabase
+        .from('investments')
+        .select(selectCols)
+        .eq('status', 'confirmed')
+      if (!all.error) {
+        data =
+          (all.data ?? []).find((row) => {
+            const stored = (row as { certificate_code?: string | null }).certificate_code
+            if (stored && stored === code) return true
+            const project = row.project as { slug: string } | { slug: string }[] | null
+            const slug = Array.isArray(project) ? project[0]?.slug : project?.slug
+            return generateCertificateCode(slug || 'INV', row.id, row.confirmed_at) === code
+          }) ?? null
+      }
+    }
+
+    if (!data) return { valid: false, reason: 'No investment matches this certificate. Not a confirmed Steaders8 investor.' }
+    if (data.status !== 'confirmed' || !data.confirmed_at) {
+      return { valid: false, reason: 'This investment exists but is not confirmed.' }
+    }
+
+    const investor = data.investor as { full_name: string; email: string } | { full_name: string; email: string }[] | null
+    const project = data.project as { name: string } | { name: string }[] | null
+    const season = data.season as { label: string } | { label: string }[] | null
+    const person = Array.isArray(investor) ? investor[0] : investor
+    const proj = Array.isArray(project) ? project[0] : project
+    const sea = Array.isArray(season) ? season[0] : season
+
+    return {
+      valid: true,
+      certificateCode: (data.certificate_code as string | null) || code,
+      investorName: person?.full_name || 'Unknown',
+      email: person?.email || '',
+      projectName: proj?.name || 'Unknown project',
+      amountLabel: formatNaira(Number(data.amount)),
+      confirmedAt: data.confirmed_at as string,
+      seasonLabel: sea?.label ?? null,
+    }
+  } catch (e) {
+    return { valid: false, reason: e instanceof Error ? e.message : 'Verification failed' }
+  }
 }
 
 export async function rejectInvestment(investmentId: string, note: string) {

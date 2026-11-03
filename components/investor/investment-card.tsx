@@ -13,6 +13,7 @@ import { Countdown } from './countdown'
 import { StageTracker } from './stage-tracker'
 import { UpdatesTimeline } from './updates-timeline'
 import { PayoutList } from './payout-list'
+import { CertificateActions } from './certificate-actions'
 
 type Props = {
   investment: InvestmentWithRelations
@@ -113,6 +114,8 @@ export function InvestmentCard({ investment, updates, payouts }: Props) {
               />
             </div>
           </div>
+
+          <CertificateActions investmentId={investment.id} />
         </div>
       </div>
 

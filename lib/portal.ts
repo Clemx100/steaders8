@@ -73,6 +73,7 @@ export type Investment = {
   proof_path: string | null
   status: 'pending' | 'confirmed' | 'rejected'
   admin_note: string
+  certificate_code: string | null
   created_at: string
   confirmed_at: string | null
 }

@@ -93,6 +93,7 @@ create table public.investments (
   proof_path text,
   status public.investment_status not null default 'pending',
   admin_note text not null default '',
+  certificate_code text unique,
   created_at timestamptz not null default now(),
   confirmed_at timestamptz
 );

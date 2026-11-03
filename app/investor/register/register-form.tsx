@@ -9,6 +9,7 @@ import { z } from 'zod'
 import { CheckCircle2, Loader2 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import { Input } from '@/components/ui/input'
+import { PasswordInput } from '@/components/ui/password-input'
 import { Label } from '@/components/ui/label'
 
 const phone = z
@@ -144,14 +145,23 @@ export function RegisterForm() {
             {section.fields.map((field) => (
               <div key={field.name} className={field.full ? 'sm:col-span-2 space-y-1.5' : 'space-y-1.5'}>
                 <Label htmlFor={field.name}>{field.label}</Label>
-                <Input
-                  id={field.name}
-                  type={field.type ?? 'text'}
-                  autoComplete={field.autoComplete}
-                  inputMode={field.name === 'account_number' ? 'numeric' : undefined}
-                  aria-invalid={Boolean(errors[field.name])}
-                  {...register(field.name)}
-                />
+                {field.type === 'password' ? (
+                  <PasswordInput
+                    id={field.name}
+                    autoComplete={field.autoComplete}
+                    aria-invalid={Boolean(errors[field.name])}
+                    {...register(field.name)}
+                  />
+                ) : (
+                  <Input
+                    id={field.name}
+                    type={field.type ?? 'text'}
+                    autoComplete={field.autoComplete}
+                    inputMode={field.name === 'account_number' ? 'numeric' : undefined}
+                    aria-invalid={Boolean(errors[field.name])}
+                    {...register(field.name)}
+                  />
+                )}
                 {errors[field.name] && <p className="text-xs text-red-600">{errors[field.name]?.message}</p>}
               </div>
             ))}
